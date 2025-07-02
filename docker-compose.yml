@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15
+    container_name: postgres_db
+    restart: always
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin123
+      POSTGRES_DB: minhaaplicacao
+    volumes:
+      - /data/postgre-A:/var/lib/postgresql
+    networks:
+      - my-rede
+    ports:
+      - "5432:5432"
+
+  adminer:
+    image: adminer
+    container_name: adminer_ui
+    restart: always
+    ports:
+      - "8081:8080"
+    networks:
+      - my-rede
+
+volumes:
+  pgdata:
+
+networks:
+  my-rede:
+    driver: bridge
+
